@@ -5,7 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: dcodeIO/setup-node-nvm@master
+    - uses: actions/setup-node@v3
+      with:
+        node-version: echo $(cat .nvmrc)
     - name: Install modules
       run: npm install
     - name: Run tests
