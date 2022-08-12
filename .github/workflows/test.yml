@@ -1,0 +1,12 @@
+name: CI
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: dcodeIO/setup-node-nvm@master
+    - name: Install modules
+      run: npm install
+    - name: Run tests
+      run: npm test -- --watchAll-false
