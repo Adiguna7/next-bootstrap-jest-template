@@ -4,13 +4,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - run: nvmrc=$(cat .nvmrc)
+    - name: Read .nvmrc
+      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+      id: nvm
     - uses: actions/checkout@v3
     - id: nvmrc
       uses: browniebroke/read-nvmrc-action@v1
     - uses: actions/setup-node@v3
       with:
-        node-version: $nvmrc
+        node-version: "${{ steps.nvm.outputs.NVMRC }}"
     - name: Install modules
       run: npm install
     - name: Run tests
